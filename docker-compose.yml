@@ -13,7 +13,7 @@ services:
     networks:
       - backend
     ports:
-      - "33333:5432"
+      - "33350:5432"
 
   mp-db-dev:
     image: postgres:16.3
