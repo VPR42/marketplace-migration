@@ -1,11 +1,46 @@
 services:
-  bank-api:
+  mp-db-prod:
+    image: postgres:16.3
+    container_name: mp-db-prod
+    hostname: db
+    restart: always
+    environment:
+      POSTGRES_DB: "mp_db_prod"
+      POSTGRES_USER: "mp_prod_user"
+      POSTGRES_PASSWORD: "mp_prod_passwd"
+    volumes:
+      - /home/kinoko/postgresql/mp-db-prod:/var/lib/postgresql/data
+    networks:
+      - backend
+    ports:
+      - "33333:5432"
+
+  mp-db-dev:
+    image: postgres:16.3
+    container_name: mp-db-dev
+    hostname: db
+    restart: always
+    environment:
+      POSTGRES_DB: "mp_db_dev"
+      POSTGRES_USER: "mp_dev_user"
+      POSTGRES_PASSWORD: "mp_dev_passwd"
+    volumes:
+      - /home/kinoko/postgresql/mp-db-dev:/var/lib/postgresql/data
+    networks:
+      - backend
+    ports:
+      - "5432:5432"
+
+  marketplace-migration:
     build:
       dockerfile: ./Dockerfile
       context: ./
     restart: always
     image: marketplace-migration
     container_name: marketplace-migration
+    depends_on:
+      - mp-db-prod
+      - mp-db-dev
     volumes:
       - /home/kinoko/logs/marketplace-migration:/logs
     #      - ./logs:/logs                             # Для отладки на windows машине

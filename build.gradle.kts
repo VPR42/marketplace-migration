@@ -2,8 +2,8 @@ import org.gradle.kotlin.dsl.withType
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
-    kotlin("jvm") version "2.2.20"
-    kotlin("plugin.spring") version "2.2.20"
+    kotlin("jvm") version "2.0.21"
+    kotlin("plugin.spring") version "2.0.21"
     id("org.springframework.boot") version "3.5.6"
     id("io.spring.dependency-management") version "1.1.7"
     id("io.gitlab.arturbosch.detekt") version "1.23.8"
@@ -11,6 +11,8 @@ plugins {
 
 group = "com.vpr42"
 version = "1.0.0"
+
+val detektVersion = "1.23.8"
 
 dependencyManagement {
     imports {
@@ -23,12 +25,24 @@ repositories {
 }
 
 dependencies {
-    // Spring
-    implementation("org.springframework.boot:spring-boot-starter") // Удалить при добавлении хоть какой-то либы ибо они уже будут содержать этот стартер как родительский
+    // Kotlin
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+    // Database
+    implementation("org.springframework.boot:spring-boot-starter-jdbc")
+    runtimeOnly("org.postgresql:postgresql")
 
     // Swagger
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
     implementation("org.springdoc:springdoc-openapi-ui:1.7.0")
+
+    // Flyway
+    implementation("org.flywaydb:flyway-core")
+    implementation("org.flywaydb:flyway-database-postgresql")
+
+    // Detekt
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:$detektVersion")
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-rules-ruleauthors:$detektVersion")
 
     // Logging
     runtimeOnly("io.github.oshai:kotlin-logging-jvm:7.0.7")

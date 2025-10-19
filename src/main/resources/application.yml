@@ -4,6 +4,21 @@ logging:
 spring:
   application:
     name: marketplace-migration
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration
+
+app:
+  database:
+    dev:
+      url: jdbc:postgresql://mp-db-dev:5800/mp_db_dev
+      username: mp_dev_user
+      password: mp_dev_passwd
+      driver-class-name: org.postgresql.Driver
+    prod:
+      url: jdbc:postgresql://mp-db-prod:33333/mp_db_prod
+      username: mp_prod_user
+      password: mp_prod_passwd
+      driver-class-name: org.postgresql.Driver
 
 server:
   port: 33300
