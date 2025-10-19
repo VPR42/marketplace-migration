@@ -15,7 +15,7 @@ app:
       password: mp_dev_passwd
       driver-class-name: org.postgresql.Driver
     prod:
-      url: jdbc:postgresql://mp-db-prod:33333/mp_db_prod
+      url: jdbc:postgresql://mp-db-prod:33350/mp_db_prod
       username: mp_prod_user
       password: mp_prod_passwd
       driver-class-name: org.postgresql.Driver
