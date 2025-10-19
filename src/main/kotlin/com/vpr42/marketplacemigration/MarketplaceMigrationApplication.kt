@@ -1,11 +1,11 @@
-package com.vpr42.kotlintemplaterepository
+package com.vpr42.marketplacemigration
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class KotlinTemplateRepositoryApplication
+class MarketplaceMigrationApplication
 
 fun main(args: Array<String>) {
-    runApplication<KotlinTemplateRepositoryApplication>(*args)
+    runApplication<MarketplaceMigrationApplication>(*args)
 }
