@@ -106,6 +106,7 @@ jobs:
           if [ -f "${{ env.TARGET_DIR }}/docker-compose.yml" ]; then
             docker compose -f ${{ env.TARGET_DIR }}/docker-compose.yml down
           fi
+          docker compose -f ${{ env.TARGET_DIR }}/docker-compose.yml down
           sudo rm -rf ${{ env.TARGET_DIR }}
           if [ -d "${{ env.BACKUP_DIR }}" ]; then
             sudo mv ${{ env.BACKUP_DIR }} ${{ env.TARGET_DIR }}
