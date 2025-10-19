@@ -3,7 +3,6 @@ services:
     image: postgres:16.3
     container_name: mp-db-prod
     hostname: db
-    restart: always
     environment:
       POSTGRES_DB: "mp_db_prod"
       POSTGRES_USER: "mp_prod_user"
