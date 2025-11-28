@@ -22,7 +22,6 @@ services:
     image: marketplace-migration
     container_name: marketplace-migration
     depends_on:
-      - mp-db-prod
       - mp-db-dev
     volumes:
       - /home/kinoko/logs/marketplace-migration:/logs
