@@ -22,30 +22,11 @@ class DatabaseConfiguration(
         }.createHikariConfig()
     )
 
-    @Bean
-    fun prodDataSource() = HikariDataSource(
-        requireNotNull(applicationProperties.database[PROD]) {
-            "Connection properties app.database.$PROD is null"
-        }.createHikariConfig()
-    )
-
     // Flyway
     @Bean
     fun devFlyway(devDataSource: HikariDataSource): MigrateResult = Flyway
         .configure()
         .dataSource(devDataSource)
-        .locations("classpath:db/migration")
-        .baselineOnMigrate(true)
-        .validateOnMigrate(true)
-        .outOfOrder(false)
-        .placeholderReplacement(true)
-        .load()
-        .migrate()
-
-    @Bean
-    fun prodFlyway(prodDataSource: HikariDataSource): MigrateResult = Flyway
-        .configure()
-        .dataSource(prodDataSource)
         .locations("classpath:db/migration")
         .baselineOnMigrate(true)
         .validateOnMigrate(true)
@@ -64,6 +45,5 @@ class DatabaseConfiguration(
 
     companion object {
         private const val DEV = "dev"
-        private const val PROD = "prod"
     }
 }
