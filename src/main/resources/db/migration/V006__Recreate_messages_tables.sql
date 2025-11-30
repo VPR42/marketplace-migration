@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS "chats"
 CREATE TABLE IF NOT EXISTS "messages"
 (
     "id"      UUID PRIMARY KEY,
-    "chat_id" UUID                     NOT NULL REFERENCES "chats" ("order_id") ON DELETE CASCADE,
+    "chat_id" BIGSERIAL                NOT NULL REFERENCES "chats" ("order_id") ON DELETE CASCADE,
     "sender"  UUID                     NOT NULL REFERENCES "users" ("id"),
     "content" TEXT                     NOT NULL,
     "sent_at" TIMESTAMP WITH TIME ZONE NOT NULL
