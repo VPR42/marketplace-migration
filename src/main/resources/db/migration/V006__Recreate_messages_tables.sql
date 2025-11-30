@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS "messages";
 
 CREATE TABLE IF NOT EXISTS "chats"
 (
-    "order_id"    UUID PRIMARY KEY REFERENCES "orders" ("id") ON DELETE CASCADE,
+    "order_id"    BIGSERIAL PRIMARY KEY REFERENCES "orders" ("id") ON DELETE CASCADE,
     "master_id"   UUID        NOT NULL REFERENCES "users" ("id"),
     "customer_id" UUID        NOT NULL REFERENCES "users" ("id"),
     "status"      chat_status NOT NULL DEFAULT 'OPEN'
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS "chats"
 CREATE TABLE IF NOT EXISTS "messages"
 (
     "id"      UUID PRIMARY KEY,
-    "chat_id" UUID                     NOT NULL REFERENCES "chats" ("order_id") ON DELETE CASCADE,
+    "chat_id" BIGSERIAL                NOT NULL REFERENCES "chats" ("order_id") ON DELETE CASCADE,
     "sender"  UUID                     NOT NULL REFERENCES "users" ("id"),
     "content" TEXT                     NOT NULL,
     "sent_at" TIMESTAMP WITH TIME ZONE NOT NULL
